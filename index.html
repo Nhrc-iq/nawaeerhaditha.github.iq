@@ -12,12 +12,14 @@
     nav a:hover { text-decoration:underline; }
     section { padding:60px 20px; max-width:1200px; margin:auto; }
     section h2 { color:#1a237e; margin-bottom:20px; text-align:center; }
-    .services, .projects { display:grid; grid-template-columns:repeat(auto-fit, minmax(250px,1fr)); gap:20px; }
+    .services { display:grid; grid-template-columns:repeat(auto-fit, minmax(250px,1fr)); gap:20px; }
     .card { background:white; padding:20px; border-radius:12px; box-shadow:0 2px 6px rgba(0,0,0,0.1); transition:transform .2s; }
     .card:hover { transform:translateY(-5px); }
     .card img { width:100%; border-radius:8px; margin-bottom:15px; }
     .contact { text-align:center; }
     footer { background:#1a237e; color:white; text-align:center; padding:15px; }
+    /* Gallery styles */
+    #gallery div img { display:block; }
   </style>
 </head>
 <body>
@@ -58,12 +60,16 @@
     </div>
   </section>
 
+  <!-- 3D Gallery Section -->
   <section id="projects">
-    <h2>مشاريعنا</h2>
-    <div class="projects">
-      <div class="card"><img src="https://via.placeholder.com/400x250" alt="Project"><h3>مشروع 1</h3></div>
-      <div class="card"><img src="https://via.placeholder.com/400x250" alt="Project"><h3>مشروع 2</h3></div>
-      <div class="card"><img src="https://via.placeholder.com/400x250" alt="Project"><h3>مشروع 3</h3></div>
+    <h2>مشاريعنا - معرض ثلاثي الأبعاد</h2>
+    <div style="text-align:center; margin-bottom:20px;">
+      <input type="file" id="imageInput" accept="image/*">
+      <button onclick="addImage()">Add Image</button>
+    </div>
+
+    <div id="gallery" style="display:flex; flex-wrap:wrap; justify-content:center; perspective:1000px; gap:15px;">
+      <!-- Images will appear here -->
     </div>
   </section>
 
@@ -76,6 +82,66 @@
   <footer>
     © 2025 nawaeerhaditha - جميع الحقوق محفوظة
   </footer>
+
+  <script>
+  const gallery = document.getElementById('gallery');
+  const imageInput = document.getElementById('imageInput');
+
+  function addImage() {
+    const file = imageInput.files[0];
+    if (!file) return alert("Please select an image.");
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const imgContainer = document.createElement('div');
+      imgContainer.style.position = 'relative';
+      imgContainer.style.width = '250px';
+      imgContainer.style.height = '200px';
+      imgContainer.style.transformStyle = 'preserve-3d';
+      imgContainer.style.transition = 'transform 0.5s';
+      imgContainer.style.cursor = 'pointer';
+
+      const img = document.createElement('img');
+      img.src = e.target.result;
+      img.style.width = '100%';
+      img.style.height = '100%';
+      img.style.borderRadius = '12px';
+      img.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
+      img.style.objectFit = 'cover';
+
+      const delBtn = document.createElement('button');
+      delBtn.innerText = 'Delete';
+      delBtn.style.position = 'absolute';
+      delBtn.style.top = '5px';
+      delBtn.style.right = '5px';
+      delBtn.style.background = 'rgba(255,0,0,0.8)';
+      delBtn.style.color = 'white';
+      delBtn.style.border = 'none';
+      delBtn.style.padding = '3px 8px';
+      delBtn.style.borderRadius = '5px';
+      delBtn.style.cursor = 'pointer';
+      delBtn.onclick = () => gallery.removeChild(imgContainer);
+
+      imgContainer.appendChild(img);
+      imgContainer.appendChild(delBtn);
+
+      // 3D hover effect
+      imgContainer.onmousemove = e => {
+        const rect = imgContainer.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width/2;
+        const y = e.clientY - rect.top - rect.height/2;
+        imgContainer.style.transform = `rotateY(${x/10}deg) rotateX(${-y/10}deg)`;
+      };
+      imgContainer.onmouseleave = () => {
+        imgContainer.style.transform = `rotateY(0deg) rotateX(0deg)`;
+      };
+
+      gallery.appendChild(imgContainer);
+    };
+    reader.readAsDataURL(file);
+    imageInput.value = ''; // reset input
+  }
+  </script>
 
 </body>
 </html>

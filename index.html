@@ -6,9 +6,9 @@
   <title>nawaeerhaditha - استثمارات عقارية</title>
   <style>
     body { margin:0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:#f9f9f9; color:#333; }
-    header { background:#1a237e; color:white; padding:15px 40px; display:flex; justify-content:space-between; align-items:center; }
+    header { background:#1a237e; color:white; padding:15px 40px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;}
     header h1 { margin:0; font-size:24px; }
-    nav a { color:white; margin:0 10px; text-decoration:none; font-weight:bold; }
+    nav a { color:white; margin:5px 10px; text-decoration:none; font-weight:bold; }
     nav a:hover { text-decoration:underline; }
     section { padding:60px 20px; max-width:1200px; margin:auto; }
     section h2 { color:#1a237e; margin-bottom:20px; text-align:center; }
@@ -18,130 +18,89 @@
     .card img { width:100%; border-radius:8px; margin-bottom:15px; }
     .contact { text-align:center; }
     footer { background:#1a237e; color:white; text-align:center; padding:15px; }
-    /* Gallery styles */
-    #gallery div img { display:block; }
+    #gallery { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; perspective:1000px; }
+    #gallery div { width:200px; height:200px; transform-style:preserve-3d; transition: transform 1s; cursor:pointer; }
+    #gallery div img { width:100%; height:100%; border-radius:12px; object-fit:cover; box-shadow:0 4px 8px rgba(0,0,0,0.2);}
+    @media(max-width:768px){
+      header { flex-direction:column; align-items:flex-start; }
+      nav { margin-top:10px; }
+      #gallery div { width:45%; height:150px; }
+    }
+    @media(max-width:480px){
+      #gallery div { width:100%; height:150px; }
+    }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>nawaeerhaditha</h1>
-    <nav>
-      <a href="#about">عن الشركة</a>
-      <a href="#services">خدماتنا</a>
-      <a href="#projects">مشاريعنا</a>
-      <a href="#contact">تواصل</a>
-    </nav>
-  </header>
+<header>
+  <h1>nawaeerhaditha</h1>
+  <nav>
+    <a href="#about">عن الشركة</a>
+    <a href="#services">خدماتنا</a>
+    <a href="#projects">مشاريعنا</a>
+    <a href="#contact">تواصل</a>
+  </nav>
+</header>
 
-  <section id="about">
-    <h2>عن الشركة</h2>
-    <p style="text-align:center; max-width:800px; margin:auto;">
-      شركة <strong>nawaeerhaditha</strong> متخصصة في الاستثمارات والتطوير العقاري، 
-      نقدم حلولاً مبتكرة لتحقيق عوائد متميزة، ونبني مشاريع حديثة تلبي تطلعات العملاء.
-    </p>
-  </section>
+<section id="about">
+  <h2>عن الشركة</h2>
+  <p style="text-align:center; max-width:800px; margin:auto;">
+    شركة <strong>nawaeerhaditha</strong> متخصصة في الاستثمارات والتطوير العقاري، 
+    نقدم حلولاً مبتكرة لتحقيق عوائد متميزة، ونبني مشاريع حديثة تلبي تطلعات العملاء.
+  </p>
+</section>
 
-  <section id="services">
-    <h2>خدماتنا</h2>
-    <div class="services">
-      <div class="card">
-        <h3>الاستثمار العقاري</h3>
-        <p>توفير فرص استثمارية عالية الجودة بمردود متميز وآمن.</p>
-      </div>
-      <div class="card">
-        <h3>التطوير العقاري</h3>
-        <p>إنشاء مشاريع سكنية وتجارية حديثة بمواصفات عالمية.</p>
-      </div>
-      <div class="card">
-        <h3>التسويق العقاري</h3>
-        <p>تسويق وبيع الوحدات العقارية بأسلوب احترافي يضمن أفضل النتائج.</p>
-      </div>
+<section id="services">
+  <h2>خدماتنا</h2>
+  <div class="services">
+    <div class="card">
+      <h3>الاستثمار العقاري</h3>
+      <p>توفير فرص استثمارية عالية الجودة بمردود متميز وآمن.</p>
     </div>
-  </section>
-
-  <!-- 3D Gallery Section -->
-  <section id="projects">
-    <h2>مشاريعنا - معرض ثلاثي الأبعاد</h2>
-    <div style="text-align:center; margin-bottom:20px;">
-      <input type="file" id="imageInput" accept="image/*">
-      <button onclick="addImage()">Add Image</button>
+    <div class="card">
+      <h3>التطوير العقاري</h3>
+      <p>إنشاء مشاريع سكنية وتجارية حديثة بمواصفات عالمية.</p>
     </div>
-
-    <div id="gallery" style="display:flex; flex-wrap:wrap; justify-content:center; perspective:1000px; gap:15px;">
-      <!-- Images will appear here -->
+    <div class="card">
+      <h3>التسويق العقاري</h3>
+      <p>تسويق وبيع الوحدات العقارية بأسلوب احترافي يضمن أفضل النتائج.</p>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="contact" class="contact">
-    <h2>تواصل معنا</h2>
-    <p>📧 البريد: info@nawaeerhaditha.com</p>
-    <p>📞 الهاتف: +964 770 000 0000</p>
-  </section>
+<section id="projects">
+  <h2>مشاريعنا - معرض ثلاثي الأبعاد</h2>
+  <div id="gallery">
+    <div><img src="images/photo1.jpg" alt="Project 1"></div>
+    <div><img src="images/photo2.jpg" alt="Project 2"></div>
+    <div><img src="images/photo3.jpg" alt="Project 3"></div>
+    <div><img src="images/photo4.jpg" alt="Project 4"></div>
+    <div><img src="images/photo5.jpg" alt="Project 5"></div>
+    <div><img src="images/photo6.jpg" alt="Project 6"></div>
+  </div>
+</section>
 
-  <footer>
-    © 2025 nawaeerhaditha - جميع الحقوق محفوظة
-  </footer>
+<section id="contact" class="contact">
+  <h2>تواصل معنا</h2>
+  <p>📧 البريد: info@nawaeerhaditha.com</p>
+  <p>📞 الهاتف: +964 770 000 0000</p>
+</section>
 
-  <script>
-  const gallery = document.getElementById('gallery');
-  const imageInput = document.getElementById('imageInput');
+<footer>
+  © 2025 nawaeerhaditha - جميع الحقوق محفوظة
+</footer>
 
-  function addImage() {
-    const file = imageInput.files[0];
-    if (!file) return alert("Please select an image.");
-
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      const imgContainer = document.createElement('div');
-      imgContainer.style.position = 'relative';
-      imgContainer.style.width = '250px';
-      imgContainer.style.height = '200px';
-      imgContainer.style.transformStyle = 'preserve-3d';
-      imgContainer.style.transition = 'transform 0.5s';
-      imgContainer.style.cursor = 'pointer';
-
-      const img = document.createElement('img');
-      img.src = e.target.result;
-      img.style.width = '100%';
-      img.style.height = '100%';
-      img.style.borderRadius = '12px';
-      img.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
-      img.style.objectFit = 'cover';
-
-      const delBtn = document.createElement('button');
-      delBtn.innerText = 'Delete';
-      delBtn.style.position = 'absolute';
-      delBtn.style.top = '5px';
-      delBtn.style.right = '5px';
-      delBtn.style.background = 'rgba(255,0,0,0.8)';
-      delBtn.style.color = 'white';
-      delBtn.style.border = 'none';
-      delBtn.style.padding = '3px 8px';
-      delBtn.style.borderRadius = '5px';
-      delBtn.style.cursor = 'pointer';
-      delBtn.onclick = () => gallery.removeChild(imgContainer);
-
-      imgContainer.appendChild(img);
-      imgContainer.appendChild(delBtn);
-
-      // 3D hover effect
-      imgContainer.onmousemove = e => {
-        const rect = imgContainer.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width/2;
-        const y = e.clientY - rect.top - rect.height/2;
-        imgContainer.style.transform = `rotateY(${x/10}deg) rotateX(${-y/10}deg)`;
-      };
-      imgContainer.onmouseleave = () => {
-        imgContainer.style.transform = `rotateY(0deg) rotateX(0deg)`;
-      };
-
-      gallery.appendChild(imgContainer);
-    };
-    reader.readAsDataURL(file);
-    imageInput.value = ''; // reset input
-  }
-  </script>
+<script>
+const galleryItems = document.querySelectorAll('#gallery div');
+galleryItems.forEach(item => {
+  let angle = 0;
+  setInterval(()=>{
+    angle += 0.3;
+    item.style.transform = `rotateY(${angle}deg) rotateX(10deg)`;
+  },50);
+});
+</script>
 
 </body>
 </html>
